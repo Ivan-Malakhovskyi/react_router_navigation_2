@@ -14,8 +14,11 @@ export const ArticlesItem = ({ article }) => {
   }
 
   return (
-    <div className="col-12 col-lg-6 col-xl-4 mb-4">
-      <div className="card">
+    <li
+      className="col-12 col-lg-6 col-xl-4 mb-4"
+      style={{ marginBottom: "24px" }}
+    >
+      <Link to={`/articles/${article.title}`} from={{ from: location }}>
         <img
           height="400"
           width="400"
@@ -43,26 +46,36 @@ export const ArticlesItem = ({ article }) => {
               <b>{formatDistanceToNow(new Date(article.publishedAt))}</b>
             </li>
           </ul>
-
-          {isLogin && (
-            <div className="d-flex">
-              <button type="button" className="btn btn-danger">
-                Fake Delete article
-              </button>
-
-              <Link
-                state={{ from: location }}
-                to={article.url}
-                className="btn btn-primary ms-3"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Read article
-              </Link>
-            </div>
-          )}
         </div>
-      </div>
-    </div>
+      </Link>
+
+      {isLogin && (
+        <div className="d-flex">
+          <button
+            type="button"
+            className="btn btn-danger"
+            style={{ marginRight: "12px" }}
+          >
+            Fake Delete article
+          </button>
+
+          <Link
+            to={article.url}
+            className="btn btn-primary ms-3"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              border: "1px solid #ccc",
+              color: "#fff",
+              backgroundColor: "blue",
+              padding: "12px 16px",
+              borderRadius: "8px",
+            }}
+          >
+            Read original article text
+          </Link>
+        </div>
+      )}
+    </li>
   );
 };

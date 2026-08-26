@@ -1,1 +1,1 @@
-export { SingleArticlePage as default } from './SingleArticlePage';
+export { default } from "./SingleArticlePage";

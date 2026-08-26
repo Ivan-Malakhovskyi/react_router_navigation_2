@@ -4,7 +4,7 @@ import { AuthContext } from "@/context/context";
 
 const year = new Date().getFullYear();
 
-export const LoginPage = () => {
+const LoginPage = () => {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -68,3 +68,5 @@ export const LoginPage = () => {
     </form>
   );
 };
+
+export default LoginPage;

@@ -1,48 +1,31 @@
-import { useCallback } from "react";
 import { useSearchParams } from "react-router";
+import { useCallback, useMemo } from "react";
 
+import { useFetch } from "@/hooks/useFetch";
+import { getArticles } from "@/services/articlesServices";
 import { ArticlesNotFound } from "@/components/Articles/ArticlesNotFound/ArticlesNotFound";
-
-import { Button } from "../../components/Button";
-import { ArticlesItem } from "../../components/Articles/ArticlesItem";
-import { ArticlesSearch } from "../../components/Articles/ArticlesSearch";
-import { ArticlesLoader } from "../../components/Articles/ArticlesLoader";
-import { ArticlesError } from "../../components/Articles/ArticlesError/ArticlesError";
-import { getArticles } from "../../services/articlesServices";
-import { useFetch } from "../../hooks/useFetch";
-import { fetchStatus } from "../../constants/fetchStatus";
+import { Button } from "@/components/Button";
+import { ArticlesItem } from "@/components/Articles/ArticlesItem";
+import { ArticlesSearch } from "@/components/Articles/ArticlesSearch";
+import { ArticlesLoader } from "@/components/Articles/ArticlesLoader";
+import { ArticlesError } from "@/components/Articles/ArticlesError/ArticlesError";
+import { fetchStatus } from "@/constants/fetchStatus";
+import { toast, ToastContainer } from "react-toastify";
 
 export const ArticlesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageParam = searchParams.get("page") ?? 1;
-  const queryParam = searchParams.get("search") ?? "";
+  const page = searchParams.get("page") ?? 1;
+  const query = searchParams.get("search") ?? "";
 
-  const queryParams = Object.fromEntries([...searchParams]);
-
-  const fetchArticles = useCallback(
-    () => getArticles(queryParam, pageParam),
-    [pageParam, queryParam],
+  const queryParams = useMemo(
+    () => Object.fromEntries([...searchParams]),
+    [searchParams],
   );
 
-  const handleSubmitSearch = (e) => {
-    e.preventDefault();
-    const articleSearch = e.target.elements.search.value.trim();
-    console.log("🚀 ~ handleSubmitSearch ~ articleSearch:", articleSearch);
-
-    if (!articleSearch) {
-      alert("Empty search");
-      return;
-    }
-
-    console.log(articleSearch);
-    searchParams.set("search", articleSearch);
-    searchParams.set("page", 1);
-    setSearchParams({ search: articleSearch, page: 1 });
-  };
-
-  const handleReset = () => {
-    setSearchParams({});
-  };
+  const fetchArticles = useCallback(
+    () => getArticles(query, page),
+    [page, query],
+  );
 
   const { data, status } = useFetch(fetchArticles);
 
@@ -56,7 +39,26 @@ export const ArticlesPage = () => {
 
   const { articles } = data;
 
-  const isSearchEmpty = articles.length === 0 && queryParam;
+  const handleSubmitSearch = (e) => {
+    e.preventDefault();
+    const search = e.target.elements.search.value.trim();
+
+    if (!search) {
+      toast.error("Empty search");
+      return;
+    }
+
+    setSearchParams({ search, page });
+    e.target.reset();
+  };
+
+  const handleReset = (e) => {
+    e.preventDefault();
+    setSearchParams({});
+    e.currentTarget.form.reset();
+  };
+
+  const isSearchEmpty = articles.length === 0 && query;
 
   return (
     <>
@@ -84,7 +86,7 @@ export const ArticlesPage = () => {
                 onClick={() =>
                   setSearchParams({ ...queryParams, page: index + 1 })
                 }
-                disabled={index + 1 === pageParam}
+                disabled={index + 1 === page}
                 key={index}
               >
                 {index + 1}
@@ -93,6 +95,8 @@ export const ArticlesPage = () => {
           </div>
         </div>
       )}
+
+      <ToastContainer />
     </>
   );
 };

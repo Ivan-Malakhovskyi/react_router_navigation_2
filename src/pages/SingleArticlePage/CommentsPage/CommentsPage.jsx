@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { getComments } from "@/services/commentsServices";
 
-export const CommentsPage = () => {
+const CommentsPage = () => {
   const [comments, setComments] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -54,3 +54,5 @@ export const CommentsPage = () => {
     </>
   );
 };
+
+export default CommentsPage;

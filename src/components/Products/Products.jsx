@@ -1,31 +1,42 @@
+import { useState, useRef, useMemo } from "react";
 import { FiPlus } from "react-icons/fi";
-import { useState, useRef, useMemo, useEffect } from "react";
 
 import { InStockFilter } from "./InStockFilter";
 import { SearchInput } from "./SearchInput";
 import { CategoryFilter } from "./CategoryFilter";
-import productsJson from "@/data/products.json";
+// import productsJson from "@/data/products.json";
 import { ProductsList } from "./ProductsList";
-import { Modal } from "@/Modal/Modal";
-import { Cart } from "@/Cart/Cart";
-import { getLocalData } from "@/helpers/getLocalData";
+import { Modal } from "@/components/Modal";
+import { Cart } from "@/components/Cart";
+// import { getLocalData } from "@/helpers/getLocalData";
+import { useFetchProducts } from "@/hooks/useFetchProducts";
 
-const PRODUCTS_LOCALSTORAGE_KEY = "products";
+// const PRODUCTS_LOCALSTORAGE_KEY = "products";
 
 export const Products = () => {
-  const [products, setProducts] = useState(() =>
-    getLocalData(PRODUCTS_LOCALSTORAGE_KEY, undefined, productsJson),
-  );
+  // const [products, setProducts] = useState(() =>
+  //   getLocalData(PRODUCTS_LOCALSTORAGE_KEY, undefined, productsJson),
+  // );
   const [isModalShow, setIsModalShow] = useState(false);
   const [isInStock, setIsInStock] = useState(false);
   const [category, setCategory] = useState("");
+  const [offset, setOffset] = useState(10);
   const [search, setSearch] = useState("");
 
   const modalProduct = useRef(null);
 
-  useEffect(() => {
-    localStorage.setItem(PRODUCTS_LOCALSTORAGE_KEY, JSON.stringify(products));
-  }, [products]);
+  // useEffect(() => {
+  //   localStorage.setItem(PRODUCTS_LOCALSTORAGE_KEY, JSON.stringify(products));
+  // }, [products]);
+
+  const {
+    products,
+    isLoading,
+    showLoadMoreBtn,
+    isError,
+    handleAddProduct,
+    handleDeleteProduct,
+  } = useFetchProducts(offset);
 
   const handleChangeSearch = (event) => setSearch(event.target.value);
 
@@ -42,16 +53,20 @@ export const Products = () => {
 
   const handleModalClose = () => setIsModalShow(false);
 
-  const handleDeleteProduct = (productId) =>
-    setProducts((prev) => prev.filter(({ id }) => id !== productId));
-
-  const handleAddProduct = () => {
-    const randomIndex = Math.floor(Math.random() * productsJson.length);
-    setProducts((prev) => [
-      { ...productsJson[randomIndex], id: Date.now() },
-      ...prev,
-    ]);
+  const handleLoadMore = () => {
+    setOffset((prev) => prev + 10);
   };
+
+  // const handleDeleteProduct = (productId) =>
+  //   setProducts((prev) => prev.filter(({ id }) => id !== productId));
+
+  // const handleAddProduct = () => {
+  //   const randomIndex = Math.floor(Math.random() * productsJson.length);
+  //   setProducts((prev) => [
+  //     { ...productsJson[randomIndex], id: Date.now() },
+  //     ...prev,
+  //   ]);
+  // };
 
   const filteredProducts = useMemo(() => {
     console.log("applyFilters");
@@ -91,6 +106,9 @@ export const Products = () => {
         products={filteredProducts}
         onDeleteProduct={handleDeleteProduct}
         onModalShow={handleModalShow}
+        onLoadMore={handleLoadMore}
+        showLoadMoreBtn={showLoadMoreBtn}
+        isLoading={isLoading}
       />
       {isModalShow && (
         <Modal onModalClose={handleModalClose}>

@@ -1,7 +1,7 @@
 import image from "./pulp-fiction-john-travolta.gif";
 import { Link } from "react-router";
 
-export const NotFoundPage = () => {
+const NotFoundPage = () => {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
       <img src={image} alt="not found" style={{ width: 300 }} />
@@ -13,3 +13,5 @@ export const NotFoundPage = () => {
     </div>
   );
 };
+
+export default NotFoundPage;

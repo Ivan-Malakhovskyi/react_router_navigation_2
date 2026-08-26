@@ -5,7 +5,7 @@ import { getLocalData } from "../../../helpers/getLocalData";
 
 const LOCAL_STORAGE_PHONES_KEY = "phones";
 
-export const CounterPage = ({ defaultAndroid }) => {
+const CounterPage = ({ defaultAndroid }) => {
   const [android, setAndroid] = useState(
     getLocalData(LOCAL_STORAGE_PHONES_KEY, "android", defaultAndroid),
   ); // 10 => 20
@@ -77,3 +77,5 @@ export const CounterPage = ({ defaultAndroid }) => {
     </div>
   );
 };
+
+export default CounterPage;

@@ -1,1 +1,1 @@
-export { ExercisesPage as default } from './ExercisesPage';
+export { default } from "./ExercisesPage";
