@@ -3,9 +3,6 @@ import axios from "axios";
 const commentsApi = axios.create({
   baseURL: "https://dummyjson.com/comments/post/",
 });
-// const commentsApi = axios.create({
-//   baseURL: "https://dummyjson.com/comments/post/",
-// });
 
 const getRandomPostId = (max) => {
   return Math.round(Math.random() * max);
