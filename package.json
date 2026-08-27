@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/Ivan-Malakhovskyi/react_router_navigation_2",
+  "homepage": "https://github.com/Ivan-Malakhovskyi/react_router_navigation_2/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
