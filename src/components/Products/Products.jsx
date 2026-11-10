@@ -4,7 +4,7 @@ import { FiPlus } from "react-icons/fi";
 import { InStockFilter } from "./InStockFilter";
 import { SearchInput } from "./SearchInput";
 import { CategoryFilter } from "./CategoryFilter";
-import productsJson from "@/data/products.json";
+// import productsJson from "@/data/products.json";
 import { ProductsList } from "./ProductsList";
 import { Modal } from "@/components/Modal";
 import { Cart } from "@/components/Cart";
@@ -15,7 +15,6 @@ export const Products = () => {
   //   getLocalData(PRODUCTS_LOCALSTORAGE_KEY, undefined, productsJson),
   // );
   // const [products, setProducts] = useState([]);
-  const [offset, setOffset] = useState(10);
   // const [isEndOfProducts, setIsEndOfProducts] = useState(false);
   // const [isError, setIsError] = useState(null);
   // const [showLoadMoreBtn, setShowLoadMoreBtn] = useState(true);
@@ -23,6 +22,7 @@ export const Products = () => {
   const [isModalShow, setIsModalShow] = useState(false);
   const [isInStock, setIsInStock] = useState(false);
   const [category, setCategory] = useState("");
+  const [offset, setOffset] = useState(10);
   const [search, setSearch] = useState("");
 
   const modalProduct = useRef();
@@ -57,6 +57,17 @@ export const Products = () => {
   const handleLoadMore = () => {
     setOffset((prev) => prev + 10);
   };
+
+  // const handleDeleteProduct = (productId) =>
+  //   setProducts((prev) => prev.filter(({ id }) => id !== productId));
+
+  // const handleAddProduct = () => {
+  //   const randomIndex = Math.floor(Math.random() * productsJson.length);
+  //   setProducts((prev) => [
+  //     { ...productsJson[randomIndex], id: Date.now() },
+  //     ...prev,
+  //   ]);
+  // };
 
   const filteredProducts = useMemo(() => {
     console.log("applyFilters");

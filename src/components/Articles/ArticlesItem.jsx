@@ -17,7 +17,7 @@ export const ArticlesItem = ({ article }) => {
       className="col-12 col-lg-6 col-xl-4 mb-4"
       style={{ marginBottom: "24px" }}
     >
-      <Link to>
+      <Link to={`/articles/${article.title}`} from={{ from: location }}>
         <img
           height="400"
           width="400"

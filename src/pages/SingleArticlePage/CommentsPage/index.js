@@ -1,1 +1,1 @@
-export {CommentsPage as default} from './CommentsPage'
+export { default } from "./CommentsPage";

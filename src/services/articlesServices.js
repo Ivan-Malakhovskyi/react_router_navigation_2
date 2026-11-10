@@ -17,7 +17,7 @@ export const getArticles = async (query, page = 1) => {
 };
 
 export const getSingeArticleService = async (query) => {
-  const { data } = await axiosInstance.get("/everything", {
+  const { data } = await axiosInstance.get("everything", {
     params: {
       q: query,
       searchIn: "title",

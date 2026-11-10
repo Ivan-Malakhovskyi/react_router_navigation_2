@@ -10,6 +10,7 @@ import { ArticlesSearch } from "@/components/Articles/ArticlesSearch";
 import { ArticlesLoader } from "@/components/Articles/ArticlesLoader";
 import { ArticlesError } from "@/components/Articles/ArticlesError/ArticlesError";
 import { fetchStatus } from "@/constants/fetchStatus";
+import { toast, ToastContainer } from "react-toastify";
 
 export const ArticlesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -43,7 +44,7 @@ export const ArticlesPage = () => {
     const search = e.target.elements.search.value.trim();
 
     if (!search) {
-      alert("Empty search");
+      toast.error("Empty search");
       return;
     }
 
@@ -94,6 +95,8 @@ export const ArticlesPage = () => {
           </div>
         </div>
       )}
+
+      <ToastContainer />
     </>
   );
 };
