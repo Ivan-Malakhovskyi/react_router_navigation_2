@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useContext } from "react";
 import { Button } from "@/components/Button";
 import styles from "./Nav.module.css";
@@ -20,13 +20,15 @@ const privateRoutes = [
 
 export const AppBar = () => {
   const { logout, username } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     logout();
+    navigate("/login");
   };
 
   return (
-    <div className="flex">
+    <>
       <nav>
         {privateRoutes.map(({ id, title, path }) => (
           <NavLink
@@ -49,6 +51,6 @@ export const AppBar = () => {
           Log Out
         </Button>
       </div>
-    </div>
+    </>
   );
 };

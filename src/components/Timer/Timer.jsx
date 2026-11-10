@@ -1,32 +1,22 @@
-import { Component } from 'react';
+import { useState } from "react";
+import { Modal } from "../Modal/Modal";
+import { TimerModal } from "./TimerModal";
 
-import { Modal } from '../Modal/Modal';
+export const Timer = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen((prev) => !prev);
 
-import { TimerModal } from './TimerModal';
+  return (
+    <div className="d-flex my-5">
+      <button type="button" className="btn btn-primary my-5" onClick={toggle}>
+        Open timer
+      </button>
 
-export class Timer extends Component {
-  state = {
-    isOpen: false,
-  };
-
-  toggle = () => {
-    this.setState(prevState => ({ isOpen: !prevState.isOpen }));
-  };
-
-  render() {
-    const { isOpen } = this.state;
-    return (
-      <div className="d-flex my-5">
-        <button type="button" className="btn btn-primary my-5" onClick={this.toggle}>
-          Open timer
-        </button>
-
-        {isOpen && (
-          <Modal onModalClose={this.toggle}>
-            <TimerModal />
-          </Modal>
-        )}
-      </div>
-    );
-  }
-}
+      {isOpen && (
+        <Modal onModalClose={toggle}>
+          <TimerModal />
+        </Modal>
+      )}
+    </div>
+  );
+};

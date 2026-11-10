@@ -1,18 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useLocation, useParams } from "react-router";
+import { Link, Outlet } from "react-router";
 import { toast } from "react-toastify";
 
 import { Loader } from "@/components/Loader";
 import { getSingeArticleService } from "@/services/articlesServices";
 
 export const SingleArticlePage = () => {
-  const { articleId } = useParams();
-
-  const location = useLocation();
-
-  console.log(location.state);
-  const prevLocation = location.state?.from ?? "/articles";
-
   const [article, setArticle] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -54,7 +47,6 @@ export const SingleArticlePage = () => {
         >
           Vew post comments
         </Link>
-        <Outlet />
       </>
     )
   );

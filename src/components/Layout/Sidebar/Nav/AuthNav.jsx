@@ -16,7 +16,7 @@ export const AuthNav = () => {
         <NavLink
           key={id}
           to={`/${path}`}
-          className={({ isActive }) => (isActive ? `${styles.active}` : "")}
+          className={({ isActive }) => (isActive ? `${styles.active}` : null)}
         >
           {title}
         </NavLink>

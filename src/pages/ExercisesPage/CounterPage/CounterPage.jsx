@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import AndroidIcon from "../../../components/AndroidIcon/AndroidIcon";
-import AppleIcon from "../../../components/AppleIcon/AppleIcon";
-import { getLocalData } from "../../../helpers/getLocalData";
+import AndroidIcon from "@/components/AndroidIcon/AndroidIcon";
+import AppleIcon from "@/components/AppleIcon/AppleIcon";
+import { getLocalData } from "@/helpers/getLocalData";
 
 const LOCAL_STORAGE_PHONES_KEY = "phones";
 

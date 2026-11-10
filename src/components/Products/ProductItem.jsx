@@ -11,12 +11,11 @@ export const ProductItem = ({
   onModalShow,
   onDeleteProduct,
 }) => {
-
   const handleDelete = () => {
-    onDeleteProduct(id)
-  }
+    onDeleteProduct(id);
+  };
   return (
-    <div className="card shadow-sm mb-4">
+    <li className="card shadow-sm mb-4" style={{ padding: "12px" }}>
       <div className="card-body">
         <div className="d-flex justify-content-between">
           <div className="d-flex flex-row align-items-center">
@@ -46,8 +45,8 @@ export const ProductItem = ({
                 {stock === 0
                   ? "Out of stock"
                   : stock < 5
-                  ? "Few left"
-                  : "In stock"}
+                    ? "Few left"
+                    : "In stock"}
               </h5>
             </div>
             <div style={{ width: "80px" }}>
@@ -70,6 +69,6 @@ export const ProductItem = ({
           </div>
         </div>
       </div>
-    </div>
+    </li>
   );
 };

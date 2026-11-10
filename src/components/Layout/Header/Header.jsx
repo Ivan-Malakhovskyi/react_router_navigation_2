@@ -4,6 +4,7 @@ import { PropTypes } from "prop-types";
 import { AuthContext } from "@/context/context";
 import { AuthNav } from "../Sidebar/Nav/AuthNav";
 import { AppBar } from "../Sidebar/Nav";
+import styles from "./Header.module.css";
 
 export const Header = () => {
   const { isLogin } = useContext(AuthContext);
@@ -11,8 +12,20 @@ export const Header = () => {
   return (
     <header className="pb-4" style={{ padding: "8px 0" }}>
       <div className="flex">
-        <NavLink to="/">Home</NavLink>
-        {isLogin ? <AppBar /> : <AuthNav />}
+        <NavLink to="/">Logo</NavLink>
+        <>
+          <div className="flex" style={{ gap: "12px" }}>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? `${styles.active}` : null
+              }
+            >
+              Home
+            </NavLink>
+            {isLogin ? <AppBar /> : <AuthNav />}
+          </div>
+        </>
       </div>
     </header>
   );

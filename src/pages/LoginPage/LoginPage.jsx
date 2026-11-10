@@ -20,7 +20,6 @@ export const LoginPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(form);
     login(form.email, form.password);
     setForm({ email: "", password: "" });
     navigate("/articles", { replace: true });

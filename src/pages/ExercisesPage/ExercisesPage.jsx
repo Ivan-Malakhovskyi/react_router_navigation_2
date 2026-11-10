@@ -6,7 +6,7 @@ const subPages = [
   { href: "counter", title: "Counter" },
 ];
 
-export const ExercisesPage = () => {
+const ExercisesPage = () => {
   return (
     <>
       <ul className="nav nav-tabs mb-5">
@@ -24,3 +24,5 @@ export const ExercisesPage = () => {
     </>
   );
 };
+
+export default ExercisesPage;

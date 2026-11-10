@@ -2,16 +2,18 @@ import { lazy } from "react";
 import { Navigate, Route, Routes } from "react-router";
 
 import { Layout } from "./components/Layout";
-import LoginPage from "./pages/LoginPage";
-import NotFoundPage from "./pages/NotFoundPage";
-import SingleArticlePage from "./pages/SingleArticlePage";
-import CommentsPage from "./pages/SingleArticlePage/CommentsPage";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ArticlesPage = lazy(() => import("./pages/ArticlesPage"));
+const SingleArticlePage = lazy(() => import("./pages/SingleArticlePage"));
+const CommentsPage = lazy(
+  () => import("./pages/SingleArticlePage/CommentsPage"),
+);
+const LoginPage = lazy(() => import("./pages/LoginPage"));
 const ExercisesPage = lazy(() => import("./pages/ExercisesPage"));
 const ProductsPage = lazy(() => import("./pages/ExercisesPage/ProductsPage"));
 const CounterPage = lazy(() => import("./pages/ExercisesPage/CounterPage"));
+const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 const App = () => {
   return (

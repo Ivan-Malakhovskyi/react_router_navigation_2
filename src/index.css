@@ -18,12 +18,10 @@ p {}
   padding: 0 16px;
 }
 
-nav {
-  &:not(:last-child)>a {
-    margin-right: 10px;
+nav>a {
+  &:not(:last-child) {
+    margin-right: 12px;
   }
-
-  margin-right: 10px;
 }
 
 .flex {
